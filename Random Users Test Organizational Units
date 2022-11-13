@@ -1,0 +1,31 @@
+#Variables
+$FirstNames = "Kevin","Pam","Dwight","Jim", "Michael", "Darryl"
+$LastNames = "Malone","Beesly","Schrute","Halpert", "Scott", "Philbin"
+$number = 0
+$fname = $FirstNames | Get-Random
+$lname = $LastNames | Get-Random
+$name = $fname+ " " + $lname
+#User input, for the domain use one DC per dot and input between ' '....example: @domain.local.com should be  'DC=domain, DC=loca, DC,com'
+
+Write-Host -NoNewline "which organisational unit:"
+$group= (Read-Host)
+Writhe-Host -NoNewline "For the domain use this format 'DC=your, DC=domain , DC=name'"
+
+$path = "OU=$group , DC=corp , DC= saf , DC=com"
+
+#Code for create the random users on the selected groups
+
+Import-Module ActiveDirectory
+
+while  ($number -lt 3) {
+$fname = $FirstNames | Get-Random
+$lname = $LastNames | Get-Random
+$name = $fname+ " " + $lname
+$sname = $fname+ "." + $lname
+$pname = $sname+"@"+"corp.saf.com"
+
+Get-Command New-ADUser -Syntax
+
+New-ADUser  -Name $name -GivenName $fname -Surname $lname -SamAccountName $sname -UserPrincipalName $pname  -AccountPassword (Read-Host -AsSecureString "Input Password")  -Path  $path  -Enabled $true
+
+$number = $number + 1
