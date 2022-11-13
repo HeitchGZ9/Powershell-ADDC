@@ -30,4 +30,3 @@ New-ADUser  -Name $name -GivenName $fname -Surname $lname -SamAccountName $sname
 
 $number = $number + 1
 }
-
