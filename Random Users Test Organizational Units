@@ -29,3 +29,5 @@ Get-Command New-ADUser -Syntax
 New-ADUser  -Name $name -GivenName $fname -Surname $lname -SamAccountName $sname -UserPrincipalName $pname  -AccountPassword (Read-Host -AsSecureString "Input Password")  -Path  $path  -Enabled $true
 
 $number = $number + 1
+}
+
